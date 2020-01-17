@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace sorting
 {
@@ -6,13 +6,14 @@ namespace sorting
     {
         static void Main(string[] args)
         {
-            int[] sizes = { 10, 1000, 1000000 };
+            int[] sizes = { 10, 10000, 100000 };
             int[] list = randomNumbers(sizes[1]);
-            BubbleSort(list);
+            InsertionSort(list);
         }
         static void BubbleSort(int[] list)
         {
             DateTime startTime = DateTime.Now;
+            Console.WriteLine("BubbleSort har startat");
             for (int i = 0; i < list.Length - 1; i++)
             {
                 for (int j = 0; j < list.Length - 1 - i; j++)
@@ -24,12 +25,31 @@ namespace sorting
                 }
             }
             TimeSpan time = DateTime.Now - startTime;
-
-            for (int n = 0; n < list.Length; n++)
+            Console.WriteLine("BubbleSort är klar");
+            /*for (int n = 0; n < list.Length; n++)
             {
                 Console.WriteLine(list[n]);
+            }*/
+            Console.WriteLine($"Tid: {time.TotalSeconds}s");
+        }
+
+        static void InsertionSort(int[] list)
+        {
+            DateTime startTime = DateTime.Now;
+            Console.WriteLine("InsertionSort har startat");
+            for (int i = 0; i < list.Length - 1; i++)
+            {
+                for (int j = i + 1; j > 0; j--)
+                {
+                    if (list[j - 1] > list[j])
+                    {
+                        Swap(ref list[j - 1], ref list[j]);
+                    }
+                }
             }
-            Console.WriteLine($"{time.TotalMilliseconds}ms");
+            TimeSpan time = DateTime.Now - startTime;
+            Console.WriteLine("InsertionSort är klar");
+            Console.WriteLine($"Tid: {time.TotalSeconds}s");
         }
 
         static void Swap(ref int a, ref int b)
