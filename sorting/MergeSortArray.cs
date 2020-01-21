@@ -16,24 +16,24 @@ namespace sorting
             if (list.Length <= 1)
                 return list;
             // The exact midpoint of our array  
-            int midPoint = list.Length / 2;
+            int middle = list.Length / 2;
             //Will represent our 'left' array
-            left = new int[midPoint];
+            left = new int[middle];
 
             //if array has an even number of elements, the left and right array will have the same number of 
             //elements
             if (list.Length % 2 == 0)
-                right = new int[midPoint];
+                right = new int[middle];
             //if array has an odd number of elements, the right array will have one more element than left
             else
-                right = new int[midPoint + 1];
+                right = new int[middle + 1];
             //populate left array
-            for (int i = 0; i < midPoint; i++)
+            for (int i = 0; i < middle; i++)
                 left[i] = list[i];
             //populate right array   
             int x = 0;
             //We start our index from the midpoint, as we have already populated the left array from 0 to midpont
-            for (int i = midPoint; i < list.Length; i++)
+            for (int i = middle; i < list.Length; i++)
             {
                 right[x] = list[i];
                 x++;
@@ -52,7 +52,7 @@ namespace sorting
         {
             int resultLength = right.Length + left.Length;
             int[] result = new int[resultLength];
-            //
+            
             int indexLeft = 0, indexRight = 0, indexResult = 0;
             //while either array still has an element
             while (indexLeft < left.Length || indexRight < right.Length)

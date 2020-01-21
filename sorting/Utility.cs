@@ -10,7 +10,6 @@ namespace sorting
             a = b;
             b = temp;
         }
-
         public static int[] randomNumbers(int size)
         {
             Random random = new Random();
