@@ -1,4 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Threading;
 
 namespace sorting
 {
@@ -9,29 +15,34 @@ namespace sorting
             int[] sizes = { 10, 100, 1000, 10000, 100000 };
             int arraySize = 3;
 
-            int[] listA = Utility.randomNumbers(sizes[arraySize]);
-            int[] listB = Utility.randomNumbers(sizes[arraySize]);
-            int[] listC = Utility.randomNumbers(sizes[arraySize]);
+            Stopwatch timer = new Stopwatch();
+
+            int[] bubble1 = Utility.randomNumbers(sizes[arraySize]);
+            int[] insert1 = Utility.randomNumbers(sizes[arraySize]);
+            int[] merge1 = Utility.randomNumbers(sizes[arraySize]);
 
             Console.WriteLine("BubbleSort started");
-            DateTime startTimeA = DateTime.Now;
-            BubbleSortArray.BubbleSort(listA);
-            TimeSpan timeA = DateTime.Now - startTimeA;
-            Console.WriteLine($"BubbleSort done - Time: {timeA.TotalSeconds}s");
+            timer.Start();
+            BubbleSortArray.BubbleSort(bubble1);
+            timer.Stop();
+            Console.WriteLine($"BubbleSort done - Time: {timer.Elapsed.TotalSeconds}s");
+            timer.Reset();
 
             Console.Write("\n");
             Console.WriteLine("InsertionSort started");
-            DateTime startTimeB = DateTime.Now;
-            InsertionSortArray.InsertionSort(listB);
-            TimeSpan timeB = DateTime.Now - startTimeB;
-            Console.WriteLine($"InsertionSort done - Time: {timeB.TotalSeconds}s");
+            timer.Start();
+            InsertionSortArray.InsertionSort(insert1);
+            timer.Stop();
+            Console.WriteLine($"InsertionSort done - Time: {timer.Elapsed.TotalSeconds}s");
+            timer.Reset();
 
             Console.Write("\n");
             Console.WriteLine("MergeSort started");
-            DateTime startTimeC = DateTime.Now;
-            MergeSortArray.MergeSort(listC);
-            TimeSpan timeC = DateTime.Now - startTimeC;
-            Console.WriteLine($"MergeSort done - Time: {timeC.TotalSeconds}s");
+            timer.Start();
+            MergeSortArray.MergeSort(merge1);
+            timer.Stop();
+            Console.WriteLine($"MergeSort done - Time: {timer.Elapsed.TotalSeconds}s");
+            timer.Reset();
         }
     }
 }

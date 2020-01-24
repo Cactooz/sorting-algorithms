@@ -6,6 +6,10 @@ namespace sorting
 {
     class MergeSortArray
     {
+        public static void MergeSort(int[] input)
+        {
+            MergeSort(input, 0, input.Length - 1);
+        }
         private static void MergeSort(int[] input, int low, int high)
         {
             if (low < high)
@@ -17,12 +21,6 @@ namespace sorting
                 Merge(input, low, middle, high);
             }
         }
-
-        public static void MergeSort(int[] input)
-        {
-            MergeSort(input, 0, input.Length - 1);
-        }
-
         private static void Merge(int[] input, int low, int middle, int high)
         {
             int left = low;
