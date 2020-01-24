@@ -6,91 +6,69 @@ namespace sorting
 {
     class MergeSortArray
     {
-        public static int[] MergeSort(int[] list)
+        private static void MergeSort(int[] input, int low, int high)
         {
-            int[] left;
-            int[] right;
-            int[] result = new int[list.Length];
-            //As this is a recursive algorithm, we need to have a base case to 
-            //avoid an infinite recursion and therfore a stackoverflow
-            if (list.Length <= 1)
-                return list;
-            // The exact midpoint of our array  
-            int middle = list.Length / 2;
-            //Will represent our 'left' array
-            left = new int[middle];
-
-            //if array has an even number of elements, the left and right array will have the same number of 
-            //elements
-            if (list.Length % 2 == 0)
-                right = new int[middle];
-            //if array has an odd number of elements, the right array will have one more element than left
-            else
-                right = new int[middle + 1];
-            //populate left array
-            for (int i = 0; i < middle; i++)
-                left[i] = list[i];
-            //populate right array   
-            int x = 0;
-            //We start our index from the midpoint, as we have already populated the left array from 0 to midpont
-            for (int i = middle; i < list.Length; i++)
+            if (low < high)
             {
-                right[x] = list[i];
-                x++;
+                int middle = (low / 2) + (high / 2);
+
+                MergeSort(input, low, middle);
+                MergeSort(input, middle + 1, high);
+                Merge(input, low, middle, high);
             }
-            //Recursively sort the left array
-            left = MergeSort(left);
-            //Recursively sort the right array
-            right = MergeSort(right);
-            //Merge our two sorted arrays
-            result = Merge(left, right);
-            return result;
         }
 
-        //This method will be responsible for combining our two sorted arrays into one giant array
-        static int[] Merge(int[] left, int[] right)
+        public static void MergeSort(int[] input)
         {
-            int resultLength = right.Length + left.Length;
-            int[] result = new int[resultLength];
-            
-            int indexLeft = 0, indexRight = 0, indexResult = 0;
-            //while either array still has an element
-            while (indexLeft < left.Length || indexRight < right.Length)
+            MergeSort(input, 0, input.Length - 1);
+        }
+
+        private static void Merge(int[] input, int low, int middle, int high)
+        {
+            int left = low;
+            int right = middle + 1;
+            int[] temp = new int[(high - low) + 1];
+            int tempIndex = 0;
+
+            while (left <= middle && right <= high)
             {
-                //if both arrays have elements  
-                if (indexLeft < left.Length && indexRight < right.Length)
+                if (input[left] < input[right])
                 {
-                    //If item on left array is less than item on right array, add that item to the result array 
-                    if (left[indexLeft] <= right[indexRight])
-                    {
-                        result[indexResult] = left[indexLeft];
-                        indexLeft++;
-                        indexResult++;
-                    }
-                    // else the item in the right array wll be added to the results array
-                    else
-                    {
-                        result[indexResult] = right[indexRight];
-                        indexRight++;
-                        indexResult++;
-                    }
+                    temp[tempIndex] = input[left];
+                    left = left + 1;
                 }
-                //if only the left array still has elements, add all its items to the results array
-                else if (indexLeft < left.Length)
+                else
                 {
-                    result[indexResult] = left[indexLeft];
-                    indexLeft++;
-                    indexResult++;
+                    temp[tempIndex] = input[right];
+                    right = right + 1;
                 }
-                //if only the right array still has elements, add all its items to the results array
-                else if (indexRight < right.Length)
+                tempIndex = tempIndex + 1;
+            }
+
+            if (left <= middle)
+            {
+                while (left <= middle)
                 {
-                    result[indexResult] = right[indexRight];
-                    indexRight++;
-                    indexResult++;
+                    temp[tempIndex] = input[left];
+                    left = left + 1;
+                    tempIndex = tempIndex + 1;
                 }
             }
-            return result;
+
+            if (right <= high)
+            {
+                while (right <= high)
+                {
+                    temp[tempIndex] = input[right];
+                    right = right + 1;
+                    tempIndex = tempIndex + 1;
+                }
+            }
+
+            for (int i = 0; i < temp.Length; i++)
+            {
+                input[low + i] = temp[i];
+            }
         }
     }
 }
