@@ -1,63 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace sorting
 {
     class QuickSortArray
     {
-        public static int[] QuickSortStart(int[] a)
+        public static int[] QuickSortStart(int[] array)
         {
-            QuickSort(a, 0, a.Length - 1);
-            return a;
+            QuickSort(array, 0, array.Length - 1);
+            return array;
         }
 
-        private static void QuickSort(int[] a, int left, int right)
+        static int Partition(int[] array, int low, int high)
         {
-            if (left < right)
-            {
-                int pivot = Partition(a, left, right);
+            int pivot = array[high];
 
-                if (pivot > 1)
-                {
-                    QuickSort(a, left, pivot - 1);
-                }
-                if (pivot + 1 < right)
-                {
-                    QuickSort(a, pivot + 1, right);
+            int lowIndex = low - 1;
+
+            for(int j = low;j < high;j++) {
+                if(array[j] <= pivot) {
+                    lowIndex++;
+
+                    Utility.Swap(ref array[lowIndex], ref array[j]);
                 }
             }
+
+            Utility.Swap(ref array[lowIndex + 1], ref array[high]);
+
+            return lowIndex + 1;
         }
 
-        private static int Partition(int[] a, int left, int right)
+        static void QuickSort(int[] array, int low, int high)
         {
-            int pivot = a[left];
-            while (true)
-            {
-                while (a[left] < pivot)
-                {
-                    left++;
-                }
+            if(low < high) {
+                int partIndex = Partition(array, low, high);
 
-                while (a[right] > pivot)
-                {
-                    right--;
-                }
-
-                if (left < right)
-                {
-                    if (a[left] == a[right]) return right;
-
-                    int temp = a[left];
-                    a[left] = a[right];
-                    a[right] = temp;
-                }
-                else
-                {
-                    return right;
-                }
+                QuickSort(array, low, partIndex - 1);
+                QuickSort(array, partIndex + 1, high);
             }
         }
     }
