@@ -7,7 +7,7 @@ namespace sorting
     {
         static void Main(string[] args)
         {
-            int[] sizes = { 10, 100, 1000, 10000, 50000, 100000 }; //Array with sizes for the arrays
+            int[] sizes = { 100, 10 }; //Array with sizes for the arrays
 
             Stopwatch timer = new Stopwatch(); //Stopwatch for taking time
 
@@ -20,6 +20,7 @@ namespace sorting
                 //Make 4 arrays with random numbers, one for each sorting type
                 int[] bubble = Utility.RandomNumbers(sizes[i]);
 				int[] insert = Utility.RandomNumbers(sizes[i]);
+				int[] insert2 = Utility.RandomNumbers(sizes[i]);
 				int[] merge = Utility.RandomNumbers(sizes[i]);
 				int[] quick = Utility.RandomNumbers(sizes[i]);
 
@@ -46,6 +47,19 @@ namespace sorting
 				//Write out all sorted numbers in insert
 				/*for(int n = 0;n < insert.Length;n++) {
 					Console.WriteLine(insert[n]);
+				}*/
+
+				Console.Write("\n"); //Empty line
+				Console.WriteLine($"InsertionSort(2){sizes[i]} started");
+				timer.Start(); //Start the timer for InsertionSort
+				InsertionSortArray2.InsertionSort(insert2); //Sort the insert array uing the InsertionSortArray class
+				timer.Stop(); //Stop the timer
+				Console.WriteLine($"InsertionSort(2) done - Time: {timer.Elapsed.TotalMilliseconds}ms"); //Write out the time
+				timer.Reset(); //Reset the timer
+
+				//Write out all sorted numbers in insert
+				/*for(int n = 0;n < insert2.Length;n++) {
+					Console.WriteLine(insert2[n]);
 				}*/
 
 				Console.Write("\n"); //Empty line
