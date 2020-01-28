@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace sorting
 {
     class QuickSortArray
     {
-        public static void QuickSort(int[] a)
+        public static int[] QuickSortStart(int[] a)
         {
             QuickSort(a, 0, a.Length - 1);
+            return a;
         }
 
         private static void QuickSort(int[] a, int left, int right)
