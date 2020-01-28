@@ -7,7 +7,7 @@ namespace sorting
     {
         static void Main(string[] args)
         {
-            int[] sizes = { 100, 10 }; //Array with sizes for the arrays
+            int[] sizes = { 10, 100, 1000, 10000, 50000, 100000 }; //Array with sizes for the arrays
 
             Stopwatch timer = new Stopwatch(); //Stopwatch for taking time
 
@@ -24,7 +24,7 @@ namespace sorting
 				int[] merge = Utility.RandomNumbers(sizes[i]);
 				int[] quick = Utility.RandomNumbers(sizes[i]);
 
-                Console.WriteLine($"BubbleSort{sizes[i]} started");
+				Console.WriteLine($"BubbleSort{sizes[i]} started");
 				timer.Start(); //Start the timer for BubbleSort
 				BubbleSortArray.BubbleSort(bubble); //Sort the bubble array using the BubbleSortArray class
 				timer.Stop(); //Stop the timer
