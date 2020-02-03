@@ -11,7 +11,7 @@ namespace sorting
 
             	Stopwatch timer = new Stopwatch(); //Stopwatch for taking time
 
-			//Go through all the values in the sizes array and execute the sortings
+		//Go through all the values in the sizes array and execute the sortings
 		for(int i = 0; i < sizes.Length; i++) {
 			Console.WriteLine("——————————————————————");
 			Console.WriteLine($"Sorting {sizes[i]} numbers"); //Write how many numbers are being sorted 
